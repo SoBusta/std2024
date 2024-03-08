@@ -1,0 +1,55 @@
+[Client|
+  Permet de stocker les données correspondant à un client
+  |
+  (1) Création :
+  + Spécifier le nom (et prénom?) et l'adresse
+  (2) Modification :
+  + Changer le nom
+  + Changer l'addresse
+  (3) Destruction :
+  + Libération de l'espace
+  (4) Accès :
+  + Donne le nom
+  + Donne l'adresse
+  
+  | Exceptions :
+  + Accéder à une partie inexistante de l'instance du type (4)]
+  
+[Voiture|
+  Permet de stocker les données correspondant à une voiture
+  |
+  (1) Création :
+  + Spécifier la marque, le modèle, l'immatriculation et leur propriétaire
+  (2) Modification :
+  + Changer la marque
+  + Changer le modèle
+  + Changer l'immatriculation
+  + Changer le propriétaire
+  (3) Destruction :
+  + Libération de l'espace
+  (4) Accès :
+  + Donne la marque
+  + Donne le modèle
+  + Donne l'immatriculation
+  + Donne le propriétaire
+  | Exceptions :
+  + Accéder à une partie inexistante de l'instance du type (4)]
+
+[Registre|
+  Permet de regrouper tous les clients et voitures |
+  (1) Création :
+  + Spécifier le nom du registre
+  (2) Modification :
+  + Ajouter une voiture
+  + Supprimer une voiture
+  (3) Destruction :
+  + Libération de l'espace
+  (4) Accès :
+  + Lister tous les clients
+  + Lister toutes les voitures
+  | Exceptions :
+  + Supprimer une voiture inexistante (2)]
+
+[Client] --> [Voiture]
+[Voiture] --> [Registre]
+

@@ -1,14 +1,20 @@
 #ifndef LIST_H
 #define LIST_H
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct listNode
 {
-    // TODO: Implement
+    void *value;
+    int index;
+    struct listNode *next;
+
 } ListNode;
 
 typedef struct list
 {
-    // TODO: Implement
+    ListNode *debut;
+    ListNode *head;
 } List;
 
 List *list_create();
@@ -20,5 +26,6 @@ void list_insert(List *list, int index, void *data);
 int list_indexOf(List *list, void *data);
 void list_delete(List *list, int index);
 void list_destroy(List *list);
+
 
 #endif
