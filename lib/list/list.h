@@ -15,6 +15,7 @@ typedef struct list
 {
     ListNode *debut;
     ListNode *head;
+    int size;
 } List;
 
 List *list_create();
@@ -26,6 +27,8 @@ void list_insert(List *list, int index, void *data);
 int list_indexOf(List *list, void *data);
 void list_delete(List *list, int index);
 void list_destroy(List *list);
+void head_delete(List *list); // private
+void tail_delete(List *list); // private
 
 
 #endif
