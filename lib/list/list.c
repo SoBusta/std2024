@@ -82,25 +82,35 @@ if (list != NULL){
 
     ListNode *current = list->debut;
 
-    // Traverse the list to the node of preceding index
-    while(current->index != index - 1){
+    if(index == 0){
+        newNode->next = list->debut;
+        list->debut = newNode;
+        current = list->debut;
+    }
+    
+    else{
+
+        // Traverse the list to the node of preceding index
+        while(current->index != index - 1){
+            current = current->next;
+        }
+
+        newNode->next = current->next;
+        current->next = NULL;
+        current->next = newNode;
+
         current = current->next;
     }
-
-    newNode->next = current->next;
-    current->next = NULL;
-    current->next = newNode;
 
     list->size += 1;
 
     // Updates the indices
     for(int i = index + 1; i < list_size(list); i++){
-        current = newNode->next;
+        current = current->next;
         current->index += 1;
+        //printf("%d\n", current->index);
     }
-
-    //free(current);
-
+    
     }
 
 }
@@ -111,6 +121,11 @@ int list_indexOf(List *list, void *data){
 
     while(current->value != data){
         current = current->next;
+
+        // The node hasn't been found
+        if(current == NULL){
+            return -1;
+        }
     }
 
     return current->index;
@@ -217,3 +232,15 @@ int list_contains(List *list, void *data){
 
     return 0;
 }
+
+// int main(void){
+
+//     List* list = list_create();
+
+//     for(int i = 0; i<100; i++){
+//         list_append(list, (void*)i);
+//         printf("%d\n", (char*)list_indexOf(list, i));
+//     }
+
+//     return 1;
+// }
