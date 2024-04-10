@@ -30,47 +30,53 @@ void queue_destroy(Queue *queue){
 
 }
 void queue_enqueue(Queue *queue, void *data){
+    if(queue == NULL){
+        return;
+    }
 
     QueueNode *newNode = malloc(sizeof(QueueNode));
-    if(newNode->value != NULL){
-        memcpy(newNode->value, data, sizeof(*data));
-    }
+
     newNode->next = NULL;
     newNode->value = data;
 
-    newNode->next = queue->tail;
-    queue->tail = newNode;
-    
-    if(queue->size == 0){
+    if(queue->head != NULL){
+        queue->tail->next = newNode;
+        queue->tail = newNode;
+    } else{
         queue->head = newNode;
+        queue->tail = newNode;
     }
 
     queue->size += 1;
-
 }
 void *queue_dequeue(Queue *queue){
+
+    if(queue == NULL){
+        return NULL;
+    }
 
     if(queue->size == 0){
         printf("queue is empty.");
         return NULL;
     }
 
-    QueueNode * head = queue->head;
+    QueueNode *head = queue->head;
     
-    QueueNode * current = queue->tail;
+    QueueNode *current = queue->tail;
 
-    for(int i = 0; i < queue->size - 2; i++){
-        current = current->next;
+    if(head != NULL){
+        queue->head = head->next;
+
+        void *data = head->value;
+
+        free(head);
+
+        queue->size -= 1;
+
+        return data;
     }
 
-    queue->head = current;
-
-    queue->size -= 1;
-
-    void* value = head->value;
-    free(head);
-
-    return value;
+    return NULL;
 
 }
 int queue_size(Queue *queue){

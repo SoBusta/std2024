@@ -16,30 +16,33 @@ List *list_create(){
 
 void list_append(List *list, void *data){
 
-    if (list != NULL){
-        // Creating the node to append
-        ListNode *newNode = malloc(sizeof(ListNode));
-        if (newNode->value != NULL) { // Allocate the size of the node's value
-            memcpy(newNode->value, data, sizeof(*data));
-        }
-        newNode->value = data;
-        newNode->next = NULL;
-
-        // Add to the list
-        if(list->head == NULL){
-            newNode->index = 0;
-            list->head = newNode;
-            list->debut = newNode;
-        }
-        else{
-            newNode->index = list->head->index + 1;
-            list->head->next = newNode;
-            list->head = newNode;
-        }
-
-        list->size += 1;
-        
+    if(list == NULL){
+        return;
     }
+    // Creating the node to append
+    ListNode *newNode = malloc(sizeof(ListNode));
+    if(newNode == NULL){
+        return;
+    }
+
+    newNode->value = data;
+    newNode->next = NULL;
+
+    // Add to the list
+    if(list->head == NULL){
+        newNode->index = 0;
+        list->head = newNode;
+        list->debut = newNode;
+    }
+    else{
+        newNode->index = list->head->index + 1;
+        list->head->next = newNode;
+        list->head = newNode;
+    }
+
+    list->size += 1;
+        
+    
 }
 void *list_get(List *list, int index){
 
@@ -70,12 +73,15 @@ int list_size(List *list){
 // Inserts node before the given index
 void list_insert(List *list, int index, void *data){
 
-if (list != NULL){
+    if(list == NULL){
+        return;
+    }
     // Creating the node to insert
     ListNode *newNode = malloc(sizeof(ListNode));
-    if (newNode->value != NULL) { // Allocate the size of the node's value
-        memcpy(newNode->value, data, sizeof(*data));
+    if(newNode == NULL){
+        return;
     }
+
     newNode->value = data;
     newNode->next = NULL;
     newNode->index = index;
@@ -108,11 +114,8 @@ if (list != NULL){
     for(int i = index + 1; i < list_size(list); i++){
         current = current->next;
         current->index += 1;
-        //printf("%d\n", current->index);
     }
     
-    }
-
 }
 
 int list_indexOf(List *list, void *data){
@@ -232,15 +235,3 @@ int list_contains(List *list, void *data){
 
     return 0;
 }
-
-// int main(void){
-
-//     List* list = list_create();
-
-//     for(int i = 0; i<100; i++){
-//         list_append(list, (void*)i);
-//         printf("%d\n", (char*)list_indexOf(list, i));
-//     }
-
-//     return 1;
-// }
