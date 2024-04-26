@@ -235,3 +235,19 @@ int list_contains(List *list, void *data){
 
     return 0;
 }
+
+void list_destroy(List *list) {
+    if(list == NULL) {
+        return;
+    }
+
+    for (ListNode *node = list->debut; node != NULL;) {
+        ListNode *tmp = node->next;
+
+        free(node);
+
+        node = tmp;
+    }
+
+    free(list);
+}

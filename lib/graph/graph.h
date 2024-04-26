@@ -5,8 +5,15 @@
 
 typedef struct graph
 {
-    // TODO: Implement
+    int vertices;
+    List **neighbours;
 } Graph;
+
+typedef struct edge
+{
+    int node;
+    float weight;
+} Edge;
 
 Graph *graph_create(int size);
 void graph_destroy(Graph *graph);
