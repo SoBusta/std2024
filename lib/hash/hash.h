@@ -9,7 +9,10 @@ unsigned long int hashFunction(void *key);
 // Hash table
 typedef struct hashTable
 {
-    // TODO: Implement
+    int size;
+    void **buckets;
+
+    unsigned long int (*hashFunction)(void *); // reference to the hashfunction
 } HashTable;
 
 HashTable *hashCreate(int size, unsigned long int (*hashFunction)(void *));
@@ -20,12 +23,21 @@ void *hash_get(HashTable *table, void *key);
 int hash_size(HashTable *table);
 
 
-
 // Hash table with external chaining
 typedef struct hashTableChain
 {
-    // TODO: Implement
+    int size;
+    void **buckets;
+
+    unsigned long int (*hashFunction)(void *); // reference to the hashfunction
 } HashTableChain;
+
+
+typedef struct hashTableBucketNode
+{
+    void* data;
+    void* key;
+} HashTableBucketNode;
 
 HashTableChain *hashChainCreate(int size, unsigned long int (*hashFunction)(void *));
 void hash_chain_destroy(HashTableChain *table);
