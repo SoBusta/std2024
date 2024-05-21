@@ -22,7 +22,7 @@ unsigned long int hashFunction(void* key){
        // On utilise le codage ASCII pour déterminer la position de la lettre dans l'alphabet
        int alphabetPos = letter - 'a' + 1;
 
-       hash += alphabetPos*  pow(ALPHABET_SIZE, i);
+       hash += alphabetPos *  pow(ALPHABET_SIZE, i);
     }
 
     return hash;
@@ -66,7 +66,7 @@ void hash_insert(HashTable* table, void* key, void* data){
     unsigned long int hash = table->hashFunction(key);
 
     // pour s’assurer que l’index soit valide, nous utilisons le module 
-    // en base de la taille de votre table de hachage. 
+    // en base de la taille de notre table de hachage. 
     int index = hash % table->size;
 
     table->buckets[index] = data;
@@ -120,7 +120,7 @@ HashTableChain* hashChainCreate(int size, unsigned long int (*hashFunction)(void
         return NULL;
     }
 
-    void* *buckets = calloc(size, sizeof(List* ));
+    void** buckets = calloc(size, sizeof(List* ));
     if(buckets == NULL){
         free(table);
 
